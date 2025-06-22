@@ -16,11 +16,11 @@ import os
 # API server URL (adjust as needed)
 API_BASE_URL = "http://localhost:8081"
 
-def load_demo_image():
+def load_image(image_path:str):
     """Load the demo image from assets/demo.png"""
     try:
         # Load the demo image
-        image_path = 'assets/demo.png'
+        
         image = Image.open(image_path).convert("RGBA")
         
         # Convert to base64
@@ -84,7 +84,7 @@ def test_generation_request():
     """Test the generation request with simplified parameters"""
     print("Loading demo image...")
     # Load demo image
-    demo_image = load_demo_image()
+    demo_image = load_image(image_path = 'assets/example_images/052.png')
     
     # Simplified request payload with only the parameters the worker actually uses
     request_data = {
@@ -120,8 +120,7 @@ def test_generation_request():
 
 def test_async_generation():
     """Test the asynchronous generation endpoint"""
-    
-    demo_image = load_demo_image()
+    demo_image = load_image(image_path = 'assets/example_images/1154.png')
     
     request_data = {
         "image": demo_image,
@@ -239,7 +238,7 @@ if __name__ == "__main__":
     
     # Run tests if server is available
     test_health_check()
-    test_generation_request()
+    #test_generation_request()
     test_async_generation()
     
     print("\n" + "=" * 60)
